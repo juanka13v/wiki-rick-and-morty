@@ -1,6 +1,9 @@
 import React from "react";
+import FilterBtn from "./FilterBtn";
 
 const Gender = () => {
+  const genders = ["Female", "Male", "Genderless", "Unknown"];
+
   return (
     <div className="accordion-item">
       <h2 className="accordion-header" id="headingOne">
@@ -12,7 +15,7 @@ const Gender = () => {
           aria-expanded="true"
           aria-controls="collapseOne"
         >
-          Accordion Item #1
+          Gender
         </button>
       </h2>
       <div
@@ -21,9 +24,10 @@ const Gender = () => {
         aria-labelledby="headingOne"
         data-bs-parent="#accordionExample"
       >
-        <div className="accordion-body">
-          accordion-body, though the transition
-          does limit overflow.
+        <div className="accordion-body d-flex flex-wrap gap-3">
+          {genders.map((item, index) => (
+            <FilterBtn key={index} name="gender" index={index} item={item} />
+          ))}
         </div>
       </div>
     </div>

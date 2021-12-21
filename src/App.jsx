@@ -10,12 +10,11 @@ function App() {
   const [pageNumber, setPageNumber] = useState(1);
   const [fetchData, setFetchData] = useState([]);
   const [search, setSearch] = useState("");
-
-
+  const [status, setStatus] = useState("");
 
   const { info, results } = fetchData;
 
-  const url = `https://rickandmortyapi.com/api/character/?page=${pageNumber}&name=${search}`;
+  const url = `https://rickandmortyapi.com/api/character/?page=${pageNumber}&name=${search}&status=${status}`;
 
   useEffect(() => {
     (async function () {
@@ -32,20 +31,24 @@ function App() {
         Rick & Morty <span className="text-primary ubuntu">Wiki</span>
       </h1>
 
-      <Search setSearch={setSearch} setPageNumber={setPageNumber}/>
+      <Search setSearch={setSearch} setPageNumber={setPageNumber} />
 
       <div className="container">
         <div className="row">
-          <Filters />
+          <Filters setStatus={setStatus} setPageNumber={setPageNumber}/>
           <div className="col-8">
             <div className="row">
-              <Cards results={results}/>
+              <Cards results={results} />
             </div>
           </div>
         </div>
       </div>
 
-      <Pagination setPageNumber={setPageNumber} pageNumber={pageNumber} info={info}/>
+      <Pagination
+        setPageNumber={setPageNumber}
+        pageNumber={pageNumber}
+        info={info}
+      />
     </div>
   );
 }
