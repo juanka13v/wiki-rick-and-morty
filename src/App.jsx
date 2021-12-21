@@ -4,14 +4,18 @@ import React, { useState, useEffect } from "react";
 import Cards from "./components/Cards";
 import Filters from "./components/Filters";
 import Pagination from "./components/Pagination";
+import Search from "./components/Search";
 
 function App() {
-  const [pageNumber, setPageNumber] = useState(2);
+  const [pageNumber, setPageNumber] = useState(1);
   const [fetchData, setFetchData] = useState([]);
+  const [search, setSearch] = useState("");
+
+
 
   const { info, results } = fetchData;
 
-  const url = `https://rickandmortyapi.com/api/character/?page=${pageNumber}`;
+  const url = `https://rickandmortyapi.com/api/character/?page=${pageNumber}&name=${search}`;
 
   useEffect(() => {
     (async function () {
@@ -28,6 +32,8 @@ function App() {
         Rick & Morty <span className="text-primary ubuntu">Wiki</span>
       </h1>
 
+      <Search setSearch={setSearch} setPageNumber={setPageNumber}/>
+
       <div className="container">
         <div className="row">
           <div className="col-3">
@@ -41,7 +47,7 @@ function App() {
         </div>
       </div>
 
-      <Pagination setPageNumber={setPageNumber} pageNumber={pageNumber} />
+      <Pagination setPageNumber={setPageNumber} pageNumber={pageNumber} info={info}/>
     </div>
   );
 }
