@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "../components/Cards.module.scss";
+import { Link } from "react-router-dom";
 
-const Cards = ({ results }) => {
+const Cards = ({ results, page }) => {
   let display;
 
   if (results) {
@@ -9,8 +10,13 @@ const Cards = ({ results }) => {
       let { id, name, image, location, status } = item;
 
       return (
-        <div className="col-4 position-relative mb-4" key={id}>
-          <div className={`${styles.cards}`}>
+        <Link
+          style={{textDecoration: "none"}}
+          to={`${page}${id}`}
+          className="col-lg-4 col-md-6 col-12 position-relative mb-4 text-dark"
+          key={id}
+        >
+          <div className={`${styles.cards} d-flex flex-column justify-content-center`}>
             <img src={image} alt={name} className={`img-fluid ${styles.img}`} />
             <div className="content" style={{ padding: "10px" }}>
               <div className="fs-4 fw-bold mb-4">{name}</div>
@@ -47,7 +53,7 @@ const Cards = ({ results }) => {
               );
             }
           })()}
-        </div>
+        </Link>
       );
     });
   } else {

@@ -10,6 +10,7 @@ import Search from "./components/Search";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Episodes from "./pages/Episodes";
 import Locations from "./pages/Locations";
+import CardDetails from "./components/CardDetails";
 
 function App() {
   return (
@@ -20,8 +21,13 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home/>} />
+        <Route path="/:id" element={<CardDetails/>} />
+
         <Route path="/episodes" element={<Episodes/>} />
+        <Route path="/episodes/:id" element={<CardDetails/>} />
+
         <Route path="/locations" element={<Locations/>} />
+        <Route path="/locations/:id" element={<CardDetails/>} />
       </Routes>
     </Router>
   )
@@ -51,7 +57,9 @@ const Home = () => {
 
   return (
     <div className="App">
-
+      <h1 className="text-center">
+        Characters
+      </h1>
       <Search setSearch={setSearch} setPageNumber={setPageNumber} />
 
       <div className="container">
@@ -62,9 +70,9 @@ const Home = () => {
             setStatus={setStatus}
             setPageNumber={setPageNumber}
           />
-          <div className="col-8">
+          <div className="col-lg-8 col-12">
             <div className="row">
-              <Cards results={results} />
+              <Cards page="/" results={results} />
             </div>
           </div>
         </div>
